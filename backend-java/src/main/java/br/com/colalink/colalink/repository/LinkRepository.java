@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LinkRepository extends JpaRepository<LinkEntity, Long> {
+    boolean existsLinkEntityByUrlShortened(String hash);
+
 }
