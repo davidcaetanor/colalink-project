@@ -6,6 +6,7 @@ import br.com.colalink.colalink.entity.LinkEntity;
 import br.com.colalink.colalink.mapper.LinkMapper;
 import br.com.colalink.colalink.repository.LinkRepository;
 import br.com.colalink.colalink.utils.ShortCodeGenerator;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
@@ -22,7 +23,7 @@ public class LinkService {
         this.shortCodeGenerator = shortCodeGenerator;
     }
 
-    public String createShortenedUrl() {
+    public String createShortenedCode() {
         String hashCode;
         do {
             hashCode = shortCodeGenerator.execute(7);
@@ -30,9 +31,10 @@ public class LinkService {
         return hashCode;
     }
 
+    @Transactional
     public LinkDtoResponse saveEntity(LinkDtoRequest request){
         LinkEntity linkEntity = linkMapper.toEntity(request);
-        linkEntity.setUrlShortened(createShortenedUrl());
+        linkEntity.setUrlShortened(createShortenedCode());
         linkEntity.setDataExpiration(LocalDateTime.now().plusDays(1));
         LinkEntity savedEntity = linkRepository.save(linkEntity);
         return linkMapper.toDto(savedEntity);
