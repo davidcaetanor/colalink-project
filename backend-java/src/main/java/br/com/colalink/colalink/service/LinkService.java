@@ -24,11 +24,11 @@ public class LinkService {
     }
 
     public String createShortenedCode() {
-        String hashCode;
+        String shortCode;
         do {
-            hashCode = shortCodeGenerator.execute(7);
-        } while (linkRepository.existsLinkEntityByUrlShortened(hashCode));
-        return hashCode;
+            shortCode = shortCodeGenerator.execute(7);
+        } while (linkRepository.existsLinkEntityByUrlShortened(shortCode));
+        return shortCode;
     }
 
     @Transactional
@@ -39,5 +39,6 @@ public class LinkService {
         LinkEntity savedEntity = linkRepository.save(linkEntity);
         return linkMapper.toDto(savedEntity);
     }
+
 
 }
