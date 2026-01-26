@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface LinkRepository extends JpaRepository<LinkEntity, Long> {
     boolean existsLinkEntityByUrlShortened(String shortCode);
+    Optional<LinkEntity> findByUrlShortened(String shortCode);
 }

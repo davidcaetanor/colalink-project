@@ -6,9 +6,10 @@ import br.com.colalink.colalink.entity.LinkEntity;
 import br.com.colalink.colalink.mapper.LinkMapper;
 import br.com.colalink.colalink.repository.LinkRepository;
 import br.com.colalink.colalink.utils.ShortCodeGenerator;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
@@ -40,5 +41,10 @@ public class LinkService {
         return linkMapper.toDto(savedEntity);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<String> findOneEntity(String shortCode) {
+        return linkRepository.findByUrlShortened(shortCode)
+                .map(LinkEntity::getUrlOriginal);
+    }
 
 }
