@@ -18,7 +18,7 @@ public class LinkCleanupScheduler {
     }
 
     @Transactional
-    @Scheduled(fixedRate = 43200000) // milisegundos = 12 horas
+    @Scheduled(cron = "0 0 0 * * *") // SECOND MINUTE HOUR DAY MONTH WEEKDAY
     public void execute(){
         LocalDateTime now = LocalDateTime.now();
         int totalDeletedLinks = linkRepository.deleteByDataExpirationBefore(now);
