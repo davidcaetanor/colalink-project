@@ -9,6 +9,7 @@ import br.com.colalink.colalink.utils.ShortCodeGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Optional;
 
 
@@ -36,7 +37,7 @@ public class LinkService {
     public LinkDtoResponse saveEntity(LinkDtoRequest request){
         LinkEntity linkEntity = linkMapper.toEntity(request);
         linkEntity.setUrlShortened(createShortenedCode());
-        linkEntity.setDataExpiration(LocalDateTime.now().plusDays(1));
+        linkEntity.setDataExpiration(LocalDateTime.now().plusDays(7));
         LinkEntity savedEntity = linkRepository.save(linkEntity);
         return linkMapper.toDto(savedEntity);
     }
