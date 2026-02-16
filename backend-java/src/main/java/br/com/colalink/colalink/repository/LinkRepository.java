@@ -17,5 +17,4 @@ public interface LinkRepository extends JpaRepository<LinkEntity, Long> {
     @Modifying
     @Query("DELETE FROM LinkEntity linkEntity WHERE linkEntity.dataExpiration < :now")
     int deleteByDataExpirationBefore(@Param("now")LocalDateTime now);
-
 }

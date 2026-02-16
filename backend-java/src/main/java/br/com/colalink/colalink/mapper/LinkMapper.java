@@ -13,7 +13,7 @@ public class LinkMapper {
 
         String fullLink = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/v1/api/links")
+                .path("/v1/api/links/")
                 .path(linkEntity.getUrlShortened())
                 .toUriString();
         

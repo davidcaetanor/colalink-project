@@ -3,6 +3,7 @@ package br.com.colalink.colalink.controller;
 import br.com.colalink.colalink.dto.request.LinkDtoRequest;
 import br.com.colalink.colalink.dto.response.LinkDtoResponse;
 import br.com.colalink.colalink.service.LinkService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ public class LinkController {
     }
 
     @GetMapping("/{shortCode}")
+    @Operation(summary = "Devolve o URL encurtado", description ="")
     public ResponseEntity<Object> getUrl(@PathVariable String shortCode){
         return linkService.findOneEntity(shortCode)
                 .map(urlOriginal -> ResponseEntity.status(HttpStatus.FOUND)
